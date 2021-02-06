@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ViewBindingKt</string>
+    <string name="tvRecyclerViewBinding">RecyclerView View Binding Item</string>
 </resources>
