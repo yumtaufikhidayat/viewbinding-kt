@@ -4,8 +4,6 @@ This application is made as documentation of recyclerview using view binding in 
 - Material design
 - Kotlin programming language
 - Recyclerview
-- View Model architecture
-- LiveData
 - ViewBinding
 
 ### Hardware
