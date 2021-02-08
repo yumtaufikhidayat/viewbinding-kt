@@ -1,28 +1,37 @@
 package com.taufik.viewbindingkt.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.taufik.viewbindingkt.R
 import com.taufik.viewbindingkt.databinding.ItemLayoutBinding
+import com.taufik.viewbindingkt.model.ItemBinding
 
-class MyAdapter(private val itemList: List<String>)
-    : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
-    class MyViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
+    private val itemList = ArrayList<ItemBinding>()
+
+    fun setDataList(itemBinding: ArrayList<ItemBinding>) {
+        itemList.clear()
+        itemBinding.addAll(itemBinding)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyViewHolder(binding)
+        val view = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        val context: Context = holder.binding.root.context
-
-        holder.binding.tvItemBinding.text = context.getString(R.string.tvRecyclerViewBinding)
+        holder.bind(itemList[position])
     }
 
     override fun getItemCount(): Int = itemList.size
+
+    inner class MyViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(itemBinding: ItemBinding) =
+            with(binding){
+                tvItemBinding.text = itemBinding.itemName
+            }
+    }
 }

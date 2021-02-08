@@ -2,14 +2,13 @@ package com.taufik.viewbindingkt
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.taufik.viewbindingkt.adapter.MyAdapter
 import com.taufik.viewbindingkt.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var rvBinding: RecyclerView
     private lateinit var myAdapter: MyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +19,12 @@ class MainActivity : AppCompatActivity() {
         setRecyclerView()
     }
 
-    fun setRecyclerView() {
-        binding.rvBinding.adapter(myAdapter)
+    private fun setRecyclerView() {
+
+        binding.apply {
+            rvBinding.layoutManager = LinearLayoutManager(this@MainActivity)
+            rvBinding.setHasFixedSize(true)
+            rvBinding.adapter = myAdapter
+        }
     }
 }
